@@ -4,8 +4,26 @@ import java.util.Map;
 import java.util.Set;
 
 public class Locations implements Map<Integer, Location> {
-    private static Map<Integer, Location> locations = new HashMap();
+    private static Map<Integer, Location> locations = new HashMap<>();
+    static {
+        locations.put(0, new Location(0, "Home", new HashMap<>()));
+        Map<String, Integer> tempExit = new HashMap<>();
+        tempExit.put("E", 3);
+        tempExit.put("S", 2);
+        tempExit.put("V", 1);
+        locations.put(1, new Location(1, "In the forest", tempExit));
 
+        tempExit = new HashMap<>();
+        tempExit.put("E", 1);
+        tempExit.put("N", 3);
+        tempExit.put("S", 1);
+        locations.put(2, new Location(2, "In the road", tempExit));
+        tempExit = new HashMap<>();
+        tempExit.put("E", 1);
+        tempExit.put("V", 3);
+        tempExit.put("N", 1);
+        locations.put(3, new Location(3, "Climbing the mountain", tempExit));
+    }
     @Override
     public int size() {
         return locations.size();
