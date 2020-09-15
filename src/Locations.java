@@ -2,38 +2,10 @@ import java.io.*;
 import java.util.*;
 
 public class Locations implements Map<Integer, Location> {
-    private static Map<Integer, Location> locations = new HashMap<>();
-
-    public static void main(String[] args) throws IOException {
-//            try (FileWriter locationsWriter = new FileWriter("locations.txt");
-//                FileWriter directionsWriter = new FileWriter("directions.txt")){
-//                for (Location location : locations.values()) {
-//                    locationsWriter.write(location.getId()+", "+location.getLocationDescription()+"\n");
-//                    for (String direction : location.getExits().keySet()) {
-//                        directionsWriter.write(location.getId()+ "," + direction+"," + location.getExits().get(direction) + "\n");
-//                    }
-//                }
-//            }
-
-//        FileWriter fileWriter = null;
-//        try {
-//            System.out.println("Writing the file");
-//            fileWriter = new FileWriter("locations.txt");
-//            for (Location location : locations.values()) {
-//                fileWriter.write(location.getId() + ", " + location.getLocationDescription() + "\n");
-//            }
-//
-//        } finally {
-//            if (fileWriter != null) {
-//                System.out.println("Attempting to close the file");
-//                fileWriter.close();
-//                System.out.println("File closed");
-//
-//            }
-//        }
-    }
+    private static final Map<Integer, Location> locations = new HashMap<>();
 
     static {
+        //READ FILE
         Scanner scanner = null;
         try {
             System.out.println("try to read");
@@ -59,11 +31,17 @@ public class Locations implements Map<Integer, Location> {
             scanner = new Scanner(new BufferedReader(new FileReader("directions.txt")));
             scanner.useDelimiter(",");
             while (scanner.hasNext()) {
-                int index = scanner.nextInt();
-                scanner.skip(scanner.delimiter());
-                String direct = scanner.next();
-                scanner.skip(scanner.delimiter());
-                int pointTo = Integer.parseInt(scanner.nextLine());
+                String input = scanner.nextLine();
+                String[] data = input.split(",");
+                int index = Integer.parseInt(data[0]);
+                String direct = data[1];
+                int pointTo = Integer.parseInt(data[2]);
+
+//                int index = scanner.nextInt();
+//                scanner.skip(scanner.delimiter());
+//                String direct = scanner.next();
+//                scanner.skip(scanner.delimiter());
+//                int pointTo = Integer.parseInt(scanner.nextLine());
                 locations.get(index).addExit(direct, pointTo);
             }
         } catch (IOException e) {
@@ -91,6 +69,36 @@ public class Locations implements Map<Integer, Location> {
 //        tempExit.put("V", 3);
 //        tempExit.put("N", 1);
 //        locations.put(3, new Location(3, "Climbing the mountain", tempExit));
+    }
+
+    public static void main(String[] args) throws IOException {
+        //WRITE FILE
+//            try (FileWriter locationsWriter = new FileWriter("locations.txt");
+//                FileWriter directionsWriter = new FileWriter("directions.txt")){
+//                for (Location location : locations.values()) {
+//                    locationsWriter.write(location.getId()+", "+location.getLocationDescription()+"\n");
+//                    for (String direction : location.getExits().keySet()) {
+//                        directionsWriter.write(location.getId()+ "," + direction+"," + location.getExits().get(direction) + "\n");
+//                    }
+//                }
+//            }
+
+//        FileWriter fileWriter = null;
+//        try {
+//            System.out.println("Writing the file");
+//            fileWriter = new FileWriter("locations.txt");
+//            for (Location location : locations.values()) {
+//                fileWriter.write(location.getId() + ", " + location.getLocationDescription() + "\n");
+//            }
+//
+//        } finally {
+//            if (fileWriter != null) {
+//                System.out.println("Attempting to close the file");
+//                fileWriter.close();
+//                System.out.println("File closed");
+//
+//            }
+//        }
     }
 
     @Override

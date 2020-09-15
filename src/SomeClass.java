@@ -21,7 +21,6 @@ public class SomeClass {
             } else {
                 System.out.println("Not allowed in that direction");
             }
-
             if (postition == 0) {
                 break;
             }
