@@ -6,11 +6,9 @@ public class Locations implements Map<Integer, Location> {
 
     static {
         //READ FILE
-        Scanner scanner = null;
-        try {
+
+        try (Scanner scanner = new Scanner(new FileReader("locations.txt"))) {
             System.out.println("try to read");
-            FileReader dirFile = new FileReader("locations.txt");
-            scanner = new Scanner(dirFile);
             scanner.useDelimiter(",");
             while (scanner.hasNext()) {
                 int nr = scanner.nextInt();
@@ -21,17 +19,10 @@ public class Locations implements Map<Integer, Location> {
             }
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            if (scanner != null) {
-                scanner.close();
-            }
         }
-
-        try {
-            scanner = new Scanner(new BufferedReader(new FileReader("directions.txt")));
-            scanner.useDelimiter(",");
-            while (scanner.hasNext()) {
-                String input = scanner.nextLine();
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader("directions.txt"))) {
+            String input;
+            while ((input = bufferedReader.readLine()) != null) {
                 String[] data = input.split(",");
                 int index = Integer.parseInt(data[0]);
                 String direct = data[1];
@@ -46,10 +37,6 @@ public class Locations implements Map<Integer, Location> {
             }
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            if (scanner != null) {
-                scanner.close();
-            }
         }
         //**************************
 //        locations.put(0, new Location(0, "Home", new HashMap<>()));
