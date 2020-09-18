@@ -1,0 +1,4 @@
+0,Home
+1,In the forest
+2,In the road
+3,Climbing the mountain

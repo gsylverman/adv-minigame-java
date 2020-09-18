@@ -6,10 +6,10 @@ public class Location {
     private final String locationDescription;
     private Map<String, Integer> exits;
 
-    public Location(int id, String locationDescription) {
+    public Location(int id, String locationDescription, Map<String, Integer> exits) {
         this.id = id;
         this.locationDescription = locationDescription;
-        this.exits = new HashMap<>();
+        this.exits = exits;
     }
 
     public int getId() {
